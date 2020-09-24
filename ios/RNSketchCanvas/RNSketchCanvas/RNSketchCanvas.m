@@ -417,6 +417,8 @@
 
 - (NSString*) transferToBase64OfType: (NSString*) type withTransparentBackground: (BOOL) transparent includeImage:(BOOL)includeImage includeText:(BOOL)includeText cropToImageSize:(BOOL)cropToImageSize {
     UIImage *img = [self createImageWithTransparentBackground:transparent includeImage:includeImage includeText:(BOOL)includeText cropToImageSize:cropToImageSize];
+    CGSize newSize = CGSizeMake(img.size.width / 4, img.size.height / 4);
+    img = [self scaleImage:img toSize:newSize contentMode:@"AspectFit"];
     NSData *data = [self getImageData:img type:type];
     return [data base64EncodedStringWithOptions: NSDataBase64Encoding64CharacterLineLength];
 }
